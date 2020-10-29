@@ -12,9 +12,9 @@ https://service-gt609p42-1252070599.gz.apigw.tencentcs.com/release/getExamTime?a
 | account  | 学号  |
 | password | 密码  |
 
-#####错误返回：
+##### 错误返回：
 ```
 {'error':'错误信息'}
 ```
-#####正确返回：
+##### 正确返回：
 JSON格式的信息

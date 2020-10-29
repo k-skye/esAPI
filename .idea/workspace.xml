@@ -20,16 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5f18b54-9511-44df-b550-a4a9a97b3d94" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/esAPI.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/esapi/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/esapi/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getExamTime/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getExamTime/index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/getExamTime/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/getExamTime/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +115,7 @@
       <workItem from="1603776823387" duration="2930000" />
       <workItem from="1603790308746" duration="27000" />
       <workItem from="1603790369650" duration="5254000" />
-      <workItem from="1603887990953" duration="14989000" />
+      <workItem from="1603887990953" duration="15224000" />
     </task>
     <servers />
   </component>
