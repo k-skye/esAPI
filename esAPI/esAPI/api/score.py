@@ -6,7 +6,7 @@ from esAPI.exceptions import ScoreException
 
 
 class Score:
-    """ 学生成绩获取 """
+    """ 成绩查询模块 """
 
     def __init__(self, config, user, request):
         self.config = config
@@ -27,9 +27,9 @@ class Score:
         try:
             view_state = self.Request.get_view_state(score_url, **kwargs)
         except TooManyRedirects:
-            raise ScoreException(self.config['code'], '教务系统的成绩获取接口错误：TooManyRedirects')
+            raise ScoreException(self.config['code'], '成绩接口已关闭1：TooManyRedirects')
         except RequestException:
-            raise ScoreException(self.config['code'], '获取成绩请求失败：RequestException')
+            raise ScoreException(self.config['code'], '接口请求失败1：RequestException')
 
         payload = {
             '__VIEWSTATE': view_state,
@@ -42,9 +42,9 @@ class Score:
         try:
             res = self.Request.post(score_url, data=payload, **kwargs)
         except TooManyRedirects:
-            raise ScoreException(self.config['code'], '成绩接口已关闭：TooManyRedirects')
+            raise ScoreException(self.config['code'], '成绩接口已关闭2：TooManyRedirects')
         except RequestException:
-            raise ScoreException(self.config['code'], '获取成绩信息请求失败：RequestException')
+            raise ScoreException(self.config['code'], '接口请求失败2：RequestException')
 
         tip = get_alert_tip(res.text)
         if tip:

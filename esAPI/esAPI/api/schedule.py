@@ -42,7 +42,7 @@ class Schedule:
         except TooManyRedirects:
             raise ScheduleException(self.config['code'], '课表接口已关闭：TooManyRedirects')
         except RequestException:
-            raise ScheduleException(self.config['code'], '获取课表请求失败：RequestException')
+            raise ScheduleException(self.config['code'], '接口请求失败1：RequestException')
 
         tip = get_alert_tip(res.text)
         if tip:
@@ -59,7 +59,7 @@ class Schedule:
             try:
                 res = self.Request.post(self.schedule_url, data=payload, **kwargs)
             except RequestException:
-                raise ScheduleException(self.config['code'], '获取课表信息请求失败：RequestException')
+                raise ScheduleException(self.config['code'], '接口请求失败2：RequestException')
 
             schedule = ScheduleParse(
                 res.text,

@@ -5,7 +5,7 @@ from esAPI.exceptions import ExamTimeException
 
 
 class ExamTime:
-    """ 用户考试时间查询模块 """
+    """ 考试时间查询模块 """
 
     def __init__(self, config, user, request):
         self.config = config
@@ -13,21 +13,21 @@ class ExamTime:
         self.Request = request
 
     def get_exam_time(self, **kwargs):
-        """ 用户信息 获取入口 """
+        """ 考试时间 获取入口 """
         exam_time_url = self.config['url_path_list'][0]['TEST_TIME_URL'] + self.user['account']
 
         try:
             res = self.Request.get(exam_time_url, **kwargs)
         except TooManyRedirects:
-            raise ExamTimeException(self.config['code'], '用户考试时间接口已关闭：TooManyRedirects')
+            raise ExamTimeException(self.config['code'], '考试时间接口已关闭：TooManyRedirects')
         except RequestException:
-            raise ExamTimeException(self.config['code'], '获取用户信息请求失败：RequestException')
+            raise ExamTimeException(self.config['code'], '接口请求失败1：RequestException')
 
         return ExamTimeParse(self.config['code'], res.text).exam_time
 
 
 class ExamTimeParse:
-    """ 信息页面解析模块 """
+    """ 考试时间页面解析模块 """
 
     def __init__(self, code, html):
         self.data = {}

@@ -24,9 +24,9 @@ class Login:
             raise LoginException(self.config['code'], to_text(str(e)))
         except RequestException:
             if self.config['use_proxy']:
-                raise LoginException(self.config['code'], '教务系统异常，使用代理登录失败')
+                raise LoginException(self.config['code'], '教务系统外网异常，使用代理登录失败：RequestException')
             else:
-                raise LoginException(self.config['code'], '教务系统外网异常')
+                raise LoginException(self.config['code'], '教务系统外网异常：RequestException')
 
         # 处理登录结果
         try:
@@ -38,7 +38,7 @@ class Login:
                     # 验证码错误时，再次登录
                     res = self._get_api(*args, **kwargs)
                 except RequestException:
-                    raise LoginException(self.config['code'], '教务系统请求异常')
+                    raise LoginException(self.config['code'], '接口请求失败1：RequestException')
                 else:
                     try:
                         self._handle_login_result(res)
@@ -62,7 +62,7 @@ class Login:
             if tip == '验证码不正确！！':
                 raise CheckCodeException(self.config['code'], tip)
             raise IdentityException(self.config['code'], tip)
-        raise LoginException(self.config['code'], '教务系统请求异常')
+        raise LoginException(self.config['code'], '教务系统接口请求异常')
 
     def _get_login_payload(self, login_url, **kwargs):
         """

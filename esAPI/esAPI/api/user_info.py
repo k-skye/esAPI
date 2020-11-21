@@ -25,7 +25,7 @@ class UserlInfo:
         except TooManyRedirects:
             raise UserInfoException(self.config['code'], '用户信息接口已关闭：TooManyRedirects')
         except RequestException:
-            raise UserInfoException(self.config['code'], '获取用户信息请求失败：RequestException')
+            raise UserInfoException(self.config['code'], '接口请求失败1：RequestException')
 
         return UserlInfoParse(self.config['code'], res.text).user_info
 
