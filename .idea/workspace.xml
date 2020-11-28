@@ -20,14 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5f18b54-9511-44df-b550-a4a9a97b3d94" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/getStudyData/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/getBindData/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/getBindData/index.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/esAPI/esAPI/api/exam_time.py" beforeDir="false" afterPath="$PROJECT_DIR$/esAPI/esAPI/api/exam_time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/esAPI/esAPI/api/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/esAPI/esAPI/api/login.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/esAPI/esAPI/api/schedule.py" beforeDir="false" afterPath="$PROJECT_DIR$/esAPI/esAPI/api/schedule.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/esAPI/esAPI/api/score.py" beforeDir="false" afterPath="$PROJECT_DIR$/esAPI/esAPI/api/score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/esAPI/esAPI/api/user_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/esAPI/esAPI/api/user_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/getScore/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/getStudyData/index.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +48,7 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="JupyterTrust" id="0b58ac8f-6608-412a-8f80-46fd065ce29d" />
+  <component name="JupyterTrust" id="0748dd35-e67f-4e54-98e4-dbbcc7c6bc98" />
   <component name="ProjectId" id="1jRpaUlRt53JIiC1JEGbXNJbVv9" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="新增" />
@@ -69,18 +64,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.4" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/getStudyData" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/esAPI" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/getStudyData" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/esAPI" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/esAPI" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/esAPI" />
+      <recent name="$PROJECT_DIR$/getStudyData" />
     </key>
   </component>
   <component name="RunManager" selected="Python.test">
@@ -128,6 +124,9 @@
       <workItem from="1603887990953" duration="15700000" />
       <workItem from="1604281508340" duration="144000" />
       <workItem from="1605689821653" duration="7130000" />
+      <workItem from="1606370962062" duration="1885000" />
+      <workItem from="1606380420716" duration="147000" />
+      <workItem from="1606380601696" duration="10000" />
     </task>
     <servers />
   </component>
