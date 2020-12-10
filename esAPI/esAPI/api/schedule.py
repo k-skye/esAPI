@@ -48,7 +48,7 @@ class Schedule:
         if tip:
             raise ScheduleException(self.config['code'], tip)
 
-        schedule = ScheduleParse(res.text, self.config['time_list'], 0).get_schedule_dict()
+        schedule = ScheduleParse(res.text, self.config['time_list'], 0,self.config['code']).get_schedule_dict()
         # 第一次请求的时候，教务系统默认返回当前学年学期课表
         # 如果设置了学年跟学期，则获取指定学年学期的课表
         if self.schedule_year and self.schedule_term and (
@@ -109,12 +109,13 @@ class BaseScheduleParse:
     课表页面解析模块
     """
 
-    def __init__(self, html, time_list, schedule_type):
+    def __init__(self, html, time_list, schedule_type, code):
         self.schedule_year = ''
         self.schedule_term = ''
         self.time_list = time_list
         self.schedule_type = schedule_type
         self.schedule_list = [[], [], [], [], [], [], []]
+        self.code = code
 
         soup = BeautifulSoup(html, "html.parser")
         option_args = soup.find_all("option", {"selected": "selected"})
@@ -136,26 +137,37 @@ class BaseScheduleParse:
         :return:
         """
         pattern = r'^\([\u2E80-\u9FFF]{1,3}\d+\)'
-        # 每天最多有12节课, 数据从2到14, (i-1) 代表是第几节课 (偶数节 不获取)
+        # TODO 可以再加一个'(停0004)'的匹配，这样下面get week text修复的'(停0004)'bug就可以去掉了，换成这里做判断
+        # 每天最多有12节课, 数据从2到14, (i-1) 代表是第几节课 (偶数节 不获取)，遍历每一行
         for i in range(2, 14, 2):
             tds = trs[i].find_all("td")
-            # 去除无用数据，比如(上午, 第一节...  等等)
-            if i in [2, 6, 10, 12]:
-                tds.pop(0)
-            tds.pop(0)
-            # 默认获取7天内的课表(周一到周日) tds 长度为7
+            # 先去除表格头部解释用的无用数据，比如(上午, 第一节...  等等)
+            # 2020.12.10 修复晚上第11-12节的时候（i==12），不需要去掉
+            if self.code == 'huananligongdaxueguangzhouxueyuan':
+                if i in [2, 6, 10]:
+                    # 上午 下午 晚上
+                    tds.pop(0)
+            else:
+                if i in [2, 6, 10, 12]:
+                    # 上午 下午 晚上
+                    tds.pop(0)
+            tds.pop(0)  # 去掉第x节
+            # tds就有表格这一行所有课程的td内容了
+            # 一个一个获取后保存到7天内的课表数组schedule_list(周一到周日)
             for day, day_c in enumerate(tds):
+                # 处理这一行行的所有课程，这个day_c是格子里的内容，有可能有很多节课，不同周数
                 row_arr = []
                 if day_c.text != u' ':
+                    # 不要td里内容为空的
                     td_str = day_c.__unicode__()
                     rowspan = 2 if 'rowspan="2"' in td_str else 1
-                    td_main = re.sub(r'<td align="Center".*?>', '', td_str)[:-5]
+                    td_main = re.sub(r'<td align="Center".*?>', '', td_str)[:-5]    # 拿到了td格子里的文本
 
-                    for text in td_main.split('<br/><br/>'):
-                        course_arr = self._get_td_course_info(text)
-                        if course_arr[0] and not re.match(pattern, course_arr[0]):
-                            course_arr[1] = self._get_weeks_text(course_arr[1])
-                            weeks_arr = self._get_weeks_arr(course_arr[1])
+                    for text in td_main.split('<br/><br/>'):    # 这个td格子文本里的每一节课
+                        course_arr = self._get_td_course_info(text)  # 把关键信息分开，切割，放到数组里
+                        if course_arr[0] and not re.match(pattern, course_arr[0]):  # TODO 记得加了匹配之后在这里加and
+                            course_arr[1] = self._get_weeks_text(course_arr[1])  # 从中获取第x-x周 {第3-5周}
+                            weeks_arr = self._get_weeks_arr(course_arr[1])  # 把第x-x周的文字解析成一个个周数组成的int数组【3，4，5】
                             row_arr.append(course_arr + [rowspan, weeks_arr])
                 self.schedule_list[day].append(row_arr)
 
@@ -240,7 +252,6 @@ class BaseScheduleParse:
             if k not in ['选修', '公选', '必修', '限选', '任选']:
                 info_arr.append(k)
 
-
         info_arr = info_arr[:4:]
         if len(info_arr) == 3:
             # 没有上课地点的情况
@@ -256,8 +267,8 @@ class ScheduleParse(BaseScheduleParse):
     课表节数合并
     """
 
-    def __init__(self, html, time_list, schedule_type=0):
-        BaseScheduleParse.__init__(self, html, time_list, schedule_type)
+    def __init__(self, html, time_list, schedule_type=0, code=''):
+        BaseScheduleParse.__init__(self, html, time_list, schedule_type, code)
         self.merger_same_schedule()
 
     def merger_same_schedule(self):
