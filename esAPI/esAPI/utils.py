@@ -119,7 +119,7 @@ def get_time_list(class_time):
             time_list[1].append(time_text.format(times[0], times[1]))
             time_list[2].append(time_text.format(times[0], class_time[index + 1][1]))
 
-            if index < 8:
+            if index < 10:  # 2020.12.14 修复：晚上的一次性上3节、4节课的时间段没有匹配上
                 time_list[3].append(time_text.format(times[0], class_time[index + 2][1]))
                 time_list[4].append(time_text.format(times[0], class_time[index + 3][1]))
     return time_list
