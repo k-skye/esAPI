@@ -254,8 +254,12 @@ class BaseScheduleParse:
 
         info_arr = info_arr[:4:]
         if len(info_arr) == 3:
-            # 没有上课地点的情况
-            info_arr.append('')
+            if ':' in info_arr[0]:
+                # 2020.12.22 修复考试时间后第19周周2(2021-01-05) 09:00-11:00 A2-102才出现(调1217)的情况
+                info_arr = ['']
+            else:
+                # 没有上课地点的情况
+                info_arr.append('')
         if len(info_arr) == 2:
             # 2020.12.8 修复(停0048)、(停0006)和课程表中出现考试时间第18周周2(2020-12-29) 09:00-11:00 A2-304的情况
             info_arr = ['']
